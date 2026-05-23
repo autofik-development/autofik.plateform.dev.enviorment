@@ -16,7 +16,3 @@ services:
 
 volumes:
   pgdata:
-
-networks:
-  postgres-network:
-    external: true
