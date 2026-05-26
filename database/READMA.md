@@ -10,11 +10,17 @@ This setup creates a PostgreSQL database and PgAdmin management interface using 
 
 ## Quick Start
 
-### 1. Create the Docker Network
+### 1. Create the Docker Network for both pgadmin and pgdb
 
 ```powershell
+cd database/pgdb
 docker network create postgres-network
 ```
+```powershell
+cd database/pgadmin
+docker network create postgres-network
+```
+
 If linux or mac no need to run this
 
 ### 2. Start PostgreSQL
@@ -26,6 +32,7 @@ cd database/pgdb
 docker-compose up -d
 ```
 If linux or mac run
+
 ```
 cd database/pgdb/linux
 docker-compose up -d
@@ -89,3 +96,22 @@ docker-compose -f database/pgdb/docker-compose.yml down -v
 docker-compose -f database/pgadmin/docker-compose.yml down
 docker network rm postgres-network
 ``` 
+
+## Troubleshooting
+
+If PgAdmin shows `FATAL: password authentication failed for user "postgres"`, the Postgres volume was likely created with a different password before `root123` was set in the compose file.
+
+Reset the database volume and start it again:
+
+```powershell
+docker-compose -f database/pgdb/docker-compose.yml down -v
+docker-compose -f database/pgdb/docker-compose.yml up -d
+```
+
+Then connect with:
+
+- **Host:** `postgres`
+- **Port:** `5432`
+- **Username:** `postgres`
+- **Password:** `root123`
+- **Database:** `postgres`
