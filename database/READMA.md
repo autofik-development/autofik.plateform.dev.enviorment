@@ -1,6 +1,6 @@
-# Database Setup - PostgreSQL & PgAdmin
+# Database Setup - PostgreSQL (PostGIS) & PgAdmin
 
-This setup creates a PostgreSQL database and PgAdmin management interface using Docker Compose.
+This setup creates a PostgreSQL + PostGIS database and PgAdmin management interface using Docker Compose. PostGIS adds spatial/geographic data support (geometry, geography types, spatial queries).
 
 ## Prerequisites
 
@@ -96,6 +96,20 @@ docker-compose -f database/pgdb/docker-compose.yml down -v
 docker-compose -f database/pgadmin/docker-compose.yml down
 docker network rm postgres-network
 ``` 
+
+## PostGIS
+
+PostGIS is automatically enabled on the database when the container first starts. To verify:
+
+```sql
+SELECT PostGIS_Version();
+```
+
+If you switched from `postgres:16` to `postgis/postgis:16-3.4` on an existing volume, run this manually in your database:
+
+```sql
+CREATE EXTENSION IF NOT EXISTS postgis;
+```
 
 ## Troubleshooting
 
