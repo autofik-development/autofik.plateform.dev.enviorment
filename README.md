@@ -9,7 +9,7 @@ A collection of Docker Compose configurations for running the Autofik platform's
 | PostgreSQL (PostGIS) | `database/pgdb/` | `5432` | Primary database with spatial extension |
 | PgAdmin | `database/pgadmin/` | `8080` | PostgreSQL web UI |
 | Redis | `database/redis/` | `6379` | In-memory cache |
-| Kafka | `kafka/` | `9092` (broker), `9000` (UI) | Message broker (KRaft mode) |
+| Kafka | `kafka/` | `9092` (broker), `9095` (UI) | Message broker (KRaft mode) |
 | Zipkin | `zipkin/` | `9411` | Distributed tracing UI and API |
 
 Each service has its own README with detailed setup and troubleshooting instructions.
