@@ -58,11 +58,11 @@ docker compose -f zipkin/docker-compose.yml up -d
 | Service | URL / Address |
 |---------|--------------|
 | PgAdmin | http://localhost:8080 |
-| Kafka UI | http://localhost:9000 |
+| Kafka UI | http://localhost:9095 |
 | Zipkin UI | http://localhost:9411 |
 | PostgreSQL | `localhost:5432` |
 | Redis | `localhost:6379` |
-| Kafka | `localhost:9095` |
+| Kafka | `localhost:9092` |
 
 ## Stop All Services
 
