@@ -62,7 +62,7 @@ docker compose -f zipkin/docker-compose.yml up -d
 | Zipkin UI | http://localhost:9411 |
 | PostgreSQL | `localhost:5432` |
 | Redis | `localhost:6379` |
-| Kafka | `localhost:9092` |
+| Kafka | `localhost:9095` |
 
 ## Stop All Services
 
