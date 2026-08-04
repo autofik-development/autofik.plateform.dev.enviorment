@@ -1,0 +1,17 @@
+{
+  "name": "postgres-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "database.hostname": "postgres",
+    "database.port": "5432",
+    "database.user": "postgres1",
+    "database.password": "root123",
+    "database.dbname": "postgres1",
+    "topic.prefix": "autofik",
+    "plugin.name": "pgoutput",
+    "slot.name": "debezium_slot",
+    "publication.name": "debezium_publication",
+    "heartbeat.interval.ms": "5000",
+    "snapshot.mode": "initial"
+  }
+}

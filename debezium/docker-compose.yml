@@ -1,0 +1,54 @@
+services:
+
+  debezium:
+    image: quay.io/debezium/connect:3.0
+    container_name: debezium
+    restart: unless-stopped
+    environment:
+      BOOTSTRAP_SERVERS: kafka:29092
+      GROUP_ID: debezium-group
+      CONFIG_STORAGE_TOPIC: debezium_connect_configs
+      OFFSET_STORAGE_TOPIC: debezium_connect_offsets
+      STATUS_STORAGE_TOPIC: debezium_connect_statuses
+      CONFIG_STORAGE_REPLICATION_FACTOR: 1
+      OFFSET_STORAGE_REPLICATION_FACTOR: 1
+      STATUS_STORAGE_REPLICATION_FACTOR: 1
+    ports:
+      - "8083:8083"
+    networks:
+      - kafka-network
+      - postgres-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:8083/ | grep -q version"]
+      interval: 10s
+      timeout: 10s
+      retries: 30
+
+  debezium-setup:
+    image: alpine
+    container_name: debezium-setup
+    depends_on:
+      debezium:
+        condition: service_healthy
+    entrypoint: ["sh", "-c"]
+    command:
+      - |
+        apk add -q curl
+        for f in /connectors/*.json; do
+          echo "Registering connector: $f"
+          curl -sf -X POST \
+            -H "Content-Type: application/json" \
+            http://debezium:8083/connectors \
+            -d @$$f && echo " -> OK" || echo " -> FAILED"
+        done
+    volumes:
+      - ./connectors:/connectors
+    networks:
+      - kafka-network
+    restart: "no"
+
+networks:
+  kafka-network:
+    external: true
+  postgres-network:
+    external: true
