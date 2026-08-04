@@ -10,6 +10,7 @@ A collection of Docker Compose configurations for running the Autofik platform's
 | PgAdmin | `database/pgadmin/` | `8080` | PostgreSQL web UI |
 | Redis | `database/redis/` | `6379` | In-memory cache |
 | Kafka | `kafka/` | `9092` (broker), `9000` (UI) | Message broker (KRaft mode) |
+| RabbitMQ | `rabbitmq/` | `5672` (AMQP), `15672` (UI) | Message broker with management UI |
 | Zipkin | `zipkin/` | `9411` | Distributed tracing UI and API |
 
 Each service has its own README with detailed setup and troubleshooting instructions.
@@ -47,7 +48,13 @@ docker compose -f database/redis/docker-compose.yml up -d
 docker compose -f kafka/docker-compose.yml up -d
 ```
 
-### 5. Start Zipkin
+### 5. Start RabbitMQ
+
+```powershell
+docker compose -f rabbitmq/docker-compose.yml up -d
+```
+
+### 6. Start Zipkin
 
 ```powershell
 docker compose -f zipkin/docker-compose.yml up -d
@@ -63,6 +70,8 @@ docker compose -f zipkin/docker-compose.yml up -d
 | PostgreSQL | `localhost:5432` |
 | Redis | `localhost:6379` |
 | Kafka | `localhost:9092` |
+| RabbitMQ UI | http://localhost:15672 |
+| RabbitMQ (AMQP) | `localhost:5672` |
 
 ## Stop All Services
 
@@ -71,5 +80,6 @@ docker compose -f database/pgdb/docker-compose.yml down
 docker compose -f database/pgadmin/docker-compose.yml down
 docker compose -f database/redis/docker-compose.yml down
 docker compose -f kafka/docker-compose.yml down
+docker compose -f rabbitmq/docker-compose.yml down
 docker compose -f zipkin/docker-compose.yml down
 ```
