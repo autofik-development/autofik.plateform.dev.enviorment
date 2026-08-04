@@ -1,0 +1,9 @@
+server.host: "0.0.0.0"
+
+elasticsearch.hosts: ["http://elasticsearch:9200"]
+elasticsearch.username: "kibana_system"
+elasticsearch.password: "KibanaSys12345"
+
+xpack.security.encryptionKey: "autofik_security_key_must_be_32chars_min!!"
+xpack.encryptedSavedObjects.encryptionKey: "autofik_savedobjects_key_32chars_min!!!!"
+xpack.reporting.encryptionKey: "autofik_reporting_key_must_32chars_min!!!!"

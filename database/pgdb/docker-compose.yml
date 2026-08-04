@@ -3,6 +3,7 @@ services:
     image: postgis/postgis:16-3.4
     container_name: postgres
     restart: always
+    command: ["postgres", "-c", "wal_level=logical"]
     environment:
       POSTGRES_DB: postgres1
       POSTGRES_USER: postgres1
