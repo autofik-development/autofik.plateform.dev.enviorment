@@ -10,7 +10,6 @@ A collection of Docker Compose configurations for running the Autofik platform's
 | PgAdmin | `database/pgadmin/` | `8080` | PostgreSQL web UI |
 | Redis | `database/redis/` | `6379` | In-memory cache |
 | Kafka | `kafka/` | `9092` (broker), `9000` (UI) | Message broker (KRaft mode) |
-| RabbitMQ | `rabbitmq/` | `5672` (AMQP), `15672` (UI) | Message broker with management UI |
 | Zipkin | `zipkin/` | `9411` | Distributed tracing UI and API |
 
 Each service has its own README with detailed setup and troubleshooting instructions.
@@ -65,7 +64,7 @@ docker compose -f zipkin/docker-compose.yml up -d
 | Service | URL / Address |
 |---------|--------------|
 | PgAdmin | http://localhost:8080 |
-| Kafka UI | http://localhost:9000 |
+| Kafka UI | http://localhost:9095 |
 | Zipkin UI | http://localhost:9411 |
 | PostgreSQL | `localhost:5432` |
 | Redis | `localhost:6379` |
